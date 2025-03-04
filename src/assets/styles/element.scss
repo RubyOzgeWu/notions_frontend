@@ -1,0 +1,22 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #B0C4DE , 
+    ),
+    'success': (
+      'base': #2A4B7C, 
+    ),
+    'info': (
+      'base': #FFEBCD, 
+    ),
+  ),
+  $border-radius: (
+    'base': 8px,  
+    'small': 4px,  
+    'round': 12px,
+    'circle': 100%, 
+  ),
+);
+
+
+@use 'element-plus/theme-chalk/src/index.scss';
