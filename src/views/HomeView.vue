@@ -13,8 +13,15 @@
     <button @click="getDspPages">取得 DSP 資料庫所有文件</button>
     <pre v-if="DSPpages">{{ DSPpages }}</pre>
 
-    <h4>2. 新增 DSP 資料庫中文件</h4>
+    <h4>2. 取得資料庫文件</h4>
+    <button @click="getDspPage">取得 DSP 資料庫文件</button>
+    <pre v-if="DSPpage">{{ DSPpage }}</pre>
+
+    <h4>3. 新增 DSP 資料庫中文件</h4>
     <button @click="addDspPage">新增 DSP 資料庫文件</button>
+
+    <h4>4. 刪除資料庫文件</h4>
+    <button @click="deleteDspPage">刪除 DSP 資料庫文件</button>
   </div>
 </template>
 <script setup>
@@ -24,11 +31,14 @@ import {
   apiGetDatabase,
   apiGetDatabasePages,
   apiPostDatabasePage,
+  apiDeleteDatabasePage,
+  apiGetDatabasePage,
 } from "@/api/api.js";
 import { descriptionItemProps } from "element-plus";
 
 const database = ref(null);
 const DSPpages = ref(null);
+const DSPpage = ref(null);
 
 /* 新增資料庫 */
 const addDatabase = async () => {
@@ -59,6 +69,16 @@ const getDspPages = async () => {
     console.error("API 請求失敗:", error);
   }
 };
+/* 取得 DSP 資料庫文件 */
+const getDspPage = async () => {
+  try {
+    const pageId = import.meta.env.VITE_DSP_TEST_PAGE_ID;
+    const response = await apiGetDatabasePage(pageId);
+    DSPpage.value = response.data;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+};
 
 /* 新增 DSP 資料庫文件 */
 const addDspPage = async () => {
@@ -70,6 +90,16 @@ const addDspPage = async () => {
       status: "In progress",
     };
     const response = await apiPostDatabasePage(databaseId, data);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+};
+
+/* 新增 DSP 資料庫文件 */
+const deleteDspPage = async () => {
+  try {
+    const pageId = import.meta.env.VITE_DSP_TEST_PAGE_ID;
+    const response = await apiDeleteDatabasePage(pageId);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
