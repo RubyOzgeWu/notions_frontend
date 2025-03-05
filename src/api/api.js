@@ -17,41 +17,32 @@ export function apiGetDatabase() {
   return dev.get("/database");
 }
 
-export function apiPutDatabase(data) {
-  return dev.put("/database", data);
-}
+// export function apiPutDatabase(data) {
+//   return dev.put("/database", data);
+// }
 
-export function apiDeleteDatabase(id) {
-  return dev.delete("/database", { data: { id } });
-}
+// export function apiDeleteDatabase(id) {
+//   return dev.delete("/database", { data: { id } });
+// }
 
 /* DbPages 相關 API */
+// 新增文件
 export function apiPostDatabasePage(databaseId, data) {
-  return dev.post(`/database/page`, data, {
-    headers: {
-      Authorization: `Bearer ${databaseId}`,
-    },
-    withCredentials: true,
-  });
+  return dev.post(`/database/${databaseId}/page`, data);
 }
-
+// 取得所有文件
 export function apiGetDatabasePages(databaseId) {
-  return dev.get(`/database/page`, {
-    headers: {
-      Authorization: `Bearer ${databaseId}`,
-    },
-    withCredentials: true,
-  });
+  return dev.get(`/database/${databaseId}/page`);
 }
-
-// export function apiGetDatabasePage() {
-//   return dev.get("/read-task");
-// }
+// 取得文件
+export function apiGetDatabasePage(pageId) {
+  return dev.get(`/database/page/${pageId}`);
+}
 
 // export function apiPutDatabasePage(data) {
 //   return dev.put("/update-task", data);
 // }
 
-// export function apiDeleteDatabasePage(id) {
-//   return dev.delete("/delete-task", { data: { id } });
-// }
+export function apiDeleteDatabasePage(pageId) {
+  return dev.delete(`/database/page/${pageId}`);
+}
