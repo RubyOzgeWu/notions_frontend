@@ -9,12 +9,13 @@ const dev = axios.create({
 export default dev;
 
 /* Database 相關 API */
+// 新增資料庫
 export function apiPostDatabase(name) {
   return dev.post("/database", { name });
 }
-
-export function apiGetDatabase() {
-  return dev.get("/database");
+// 取得資料庫 MetaData
+export function apiGetDatabase(databaseId) {
+  return dev.get(`/database/${databaseId}`);
 }
 
 // export function apiPutDatabase(data) {
@@ -30,19 +31,19 @@ export function apiGetDatabase() {
 export function apiPostDatabasePage(databaseId, data) {
   return dev.post(`/database/${databaseId}/page`, data);
 }
+// 更新文件
+export function apiPatchDatabasePage(databaseId, pageId, data) {
+  return dev.patch(`/database/${databaseId}/page/${pageId}`, data);
+}
 // 取得所有文件
 export function apiGetDatabasePages(databaseId) {
-  return dev.get(`/database/${databaseId}/page`);
+  return dev.post(`/database/${databaseId}/pages`);
 }
 // 取得文件
 export function apiGetDatabasePage(pageId) {
   return dev.get(`/database/page/${pageId}`);
 }
-
-// export function apiPutDatabasePage(data) {
-//   return dev.put("/update-task", data);
-// }
-
+// 刪除文件
 export function apiDeleteDatabasePage(pageId) {
   return dev.delete(`/database/page/${pageId}`);
 }

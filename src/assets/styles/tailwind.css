@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary: var(--color-primary-60);
+  --color-primary-10: var(--color-primary-10);
+  --color-primary-20: var(--color-primary-20);
+  --color-primary-30: var(--color-primary-30);
+  --color-primary-40: var(--color-primary-40);
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-60: var(--color-primary-60); /* 主色 */
+  --color-primary-70: var(--color-primary-70);
+  --color-primary-80: var(--color-primary-80);
+  --color-primary-90: var(--color-primary-90);
+  --color-primary-100: var(--color-primary-100);
+
+  /* Secondary */
+  --color-secondary: var(--color-secondary-60);
+  --color-secondary-10: var(--color-secondary-10);
+  --color-secondary-20: var(--color-secondary-20);
+  --color-secondary-30: var(--color-secondary-30);
+  --color-secondary-40: var(--color-secondary-40);
+  --color-secondary-50: var(--color-secondary-50);
+  --color-secondary-60: var(--color-secondary-60); /* 次要色 */
+  --color-secondary-70: var(--color-secondary-70);
+  --color-secondary-80: var(--color-secondary-80);
+  --color-secondary-90: var(--color-secondary-90);
+  --color-secondary-100: var(--color-secondary-100);
+
+  /* Complementary (Accent) */
+  --color-accent: var(--color-accent-60);
+  --color-accent-10: var(--color-accent-10);
+  --color-accent-20: var(--color-accent-20);
+  --color-accent-30: var(--color-accent-30);
+  --color-accent-40: var(--color-accent-40);
+  --color-accent-50: var(--color-accent-50);
+  --color-accent-60: var(--color-accent-60); /* 强调色 */
+  --color-accent-70: var(--color-accent-70);
+  --color-accent-80: var(--color-accent-80);
+  --color-accent-90: var(--color-accent-90);
+  --color-accent-100: var(--color-accent-100);
+
+  /* Neutral - White */
+  --color-white: var(--color-white);
+  --color-white-95: var(--color-white-95);
+  --color-white-90: var(--color-white-90);
+  --color-white-80: var(--color-white-80);
+  --color-white-70: var(--color-white-70);
+  --color-white-60: var(--color-white-60);
+  --color-white-50: var(--color-white-50);
+  --color-white-40: var(--color-white-40);
+  --color-white-30: var(--color-white-30);
+  --color-white-20: var(--color-white-20);
+  --color-white-10: var(--color-white-10);
+
+  /* Neutral - Black */
+  --color-black: var(--color-black);
+  --color-black-10: var(--color-black-10);
+  --color-black-20: var(--color-black-20);
+  --color-black-30: var(--color-black-30);
+  --color-black-40: var(--color-black-40);
+  --color-black-50: var(--color-black-50);
+  --color-black-60: var(--color-black-60);
+  --color-black-70: var(--color-black-70);
+  --color-black-80: var(--color-black-80);
+  --color-black-90: var(--color-black-90);
+
+  /* Shadow */
+  --color-shadow: var(--color-shadow);
+
+  /* Opacity */
+  --color-opacity-30: var(--color-opacity-30);
+  --color-opacity-50: var(--color-opacity-50);
+  --color-opacity-70: var(--color-opacity-70);
+
+  /* Border Radius */
+  --rounded-none: var(--rounded-none);
+  --rounded-base: var(--rounded-base);
+  --rounded-small: var(--rounded-small);
+  --rounded-round: var(--rounded-round);
+  --rounded-circle: var(--rounded-circle);
+
+  /* Typography */
+  --font-family-sans: var(--font-family-sans);
+  --font-normal: var(--font-normal);
+  --font-bold: var(--font-bold);
+}

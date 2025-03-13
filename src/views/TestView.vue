@@ -1,5 +1,9 @@
 <template>
   <div>
+    <router-link to="/">返回首頁</router-link>
+    <h3>Google & Notion Calendar</h3>
+    <Calendar></Calendar>
+
     <h3>Database</h3>
     <h4>1. 建立資料庫</h4>
     <button @click="addDatabase">建立 Notion 資料庫</button>
@@ -35,6 +39,7 @@ import {
   apiGetDatabasePage,
 } from "@/api/api.js";
 import { descriptionItemProps } from "element-plus";
+import Calendar from "../components/dashboard/Calendar.vue";
 
 const database = ref(null);
 const DSPpages = ref(null);
@@ -95,7 +100,7 @@ const addDspPage = async () => {
   }
 };
 
-/* 新增 DSP 資料庫文件 */
+/* 刪除 DSP 資料庫文件 */
 const deleteDspPage = async () => {
   try {
     const pageId = import.meta.env.VITE_DSP_TEST_PAGE_ID;
