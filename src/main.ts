@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import '@/assets/styles/element.scss'
+import '@/assets/styles/tailwind.css'
 import '@/assets/styles/main.scss'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
