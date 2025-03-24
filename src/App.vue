@@ -1,13 +1,13 @@
 <template>
-  <div class="layout flex h-screen">
-    <SideMenu class="w-[250px] side-menu bg-primary"></SideMenu>
-    <main class="content">
-      <RouterView />
-    </main>
-  </div>
+  <Layout>
+    <template #main>
+      <router-view />
+    </template>
+  </Layout>
 </template>
 
 <script setup>
+import Layout from "./components/layout/Layout.vue";
 import SideMenu from "./components/layout/SideMenu.vue";
 </script>
 

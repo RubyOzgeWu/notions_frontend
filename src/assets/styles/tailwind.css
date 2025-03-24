@@ -67,6 +67,7 @@
 
   /* Shadow */
   --color-shadow: var(--color-shadow);
+  --shadow-light: var(--el-box-shadow-light);
 
   /* Opacity */
   --color-opacity-30: var(--color-opacity-30);
@@ -82,6 +83,28 @@
 
   /* Typography */
   --font-family-sans: var(--font-family-sans);
-  --font-normal: var(--font-normal);
-  --font-bold: var(--font-bold);
+  --font-weight-normal: var(--font-weight-normal);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold);
+
+  /* Breakpoint */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 48rem; /* 768px */
+  --breakpoint-md: 90rem; /* 1440px */
+  --breakpoint-lg: 120rem; /* 1920px */
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl font-bold;
+  }
+  h4 {
+    @apply text-xl font-bold;
+  }
 }
