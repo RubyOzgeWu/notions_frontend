@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <router-link :to="{ name: 'database', params: { databaseId } }"
       >返回資料庫</router-link
     >
@@ -25,7 +25,7 @@
     </el-form>
     <h3>取得 Notion 資料庫文件</h3>
     <pre v-if="dbPage">{{ dbPage }}</pre>
-  </div>
+  </section>
 </template>
 <script setup>
 import { ref, reactive } from "vue";

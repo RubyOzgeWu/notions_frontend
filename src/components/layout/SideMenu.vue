@@ -1,10 +1,39 @@
 <template>
-  <div>
+  <div class="p-4">
     <nav>
-      <ul>
-        <li>test</li>
-        <li>test</li>
+      <ul class="text-white leading-8 font-semibold">
+        <li>
+          <router-link to="/">主控板</router-link>
+        </li>
+        <li>
+          資料庫
+          <ul class="pl-8 font-normal">
+            <li>
+              <router-link
+                :to="{
+                  name: 'database',
+                  params: { databaseId: dspDatabaseId },
+                }"
+                >DSP</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                :to="{
+                  name: 'database',
+                  params: { databaseId: sspDatabaseId },
+                }"
+                >SSP</router-link
+              >
+            </li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </div>
 </template>
+
+<script setup>
+const dspDatabaseId = import.meta.env.VITE_DSP_DATABASE_ID;
+const sspDatabaseId = import.meta.env.VITE_SSP_DATABASE_ID;
+</script>

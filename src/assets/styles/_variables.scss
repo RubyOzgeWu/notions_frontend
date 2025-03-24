@@ -29,11 +29,24 @@
   --color-accent-30: #fff7ed;
   --color-accent-40: #fff4e7;
   --color-accent-50: #fff1e1;
-  --color-accent-60: #FFEBCD; /* 强调色 */
+  --color-accent-60: #FFEBCD; /* 強調色 */
   --color-accent-70: #ffe8c7;
   --color-accent-80: #ffe5c1;
   --color-accent-90: #ffe2bb;
   --color-accent-100: #ffdfb5;
+
+  /* Error */
+  --color-error-10: #fff2f0;
+  --color-error-20: #fff1f0;
+  --color-error-30: #ffccc7;
+  --color-error-40: #ffa39e;
+  --color-error-50: #ff7875;
+  --color-error-60: #ff4d4f;
+  --color-error-70: #d9363e;
+  --color-error-80: #b32430;
+  --color-error-90: #8c1523;
+  --color-error-100: #660e1b;
+  
 
   /* Neutral - White */
   --color-white: #ffffff;
@@ -60,6 +73,7 @@
   --color-black-90: #222222;
   --color-black: #1a1a1a;
 
+
   /* Shadow */
   --color-shadow: rgba(0, 0, 0, 0.3);
 
@@ -78,6 +92,12 @@
   /* Typography */
   --font-family-sans: 'Open Sans', 'Noto Sans TC', sans-serif;
 
-  --font-normal: 500;
-  --font-bold: 700;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Breakpoint */
+  --breakpoint-pad: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1280px;
 }
