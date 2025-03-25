@@ -1,5 +1,13 @@
 <template>
-  <section>
+  <Layout customClass="max-w-[1024px]">
+    <Title class="text-primary">{{
+      dbPage?.meta.properties.Name.title[0]?.text?.content
+    }}</Title>
+
+    <!-- <pre v-if="dbPage">{{ dbPage?.meta.properties.Name.title[0]?.text?.content }}</pre> -->
+  </Layout>
+
+  <!-- <section>
     <router-link :to="{ name: 'database', params: { databaseId } }"
       >返回資料庫</router-link
     >
@@ -25,13 +33,16 @@
     </el-form>
     <h3>取得 Notion 資料庫文件</h3>
     <pre v-if="dbPage">{{ dbPage }}</pre>
-  </section>
+  </section> -->
 </template>
+
 <script setup>
 import { ref, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { apiGetDatabasePage, apiPatchDatabasePage } from "@/api/api.js";
 import { onMounted } from "vue";
+
+import { ElLoading } from "element-plus";
 
 const route = useRoute();
 
@@ -47,11 +58,19 @@ const pageForm = reactive({
 
 /* 取得資料庫文件 */
 const getPage = async () => {
+  const loadingInstance = ElLoading.service({
+    lock: true,
+    text: "資料載入中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+
   try {
     const response = await apiGetDatabasePage(pageId);
     dbPage.value = response.data;
   } catch (error) {
     console.error("API 請求失敗:", error);
+  } finally {
+    loadingInstance.close();
   }
 };
 /* 更新資料庫文件 */

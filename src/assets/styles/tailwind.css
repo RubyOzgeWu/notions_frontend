@@ -34,12 +34,42 @@
   --color-accent-30: var(--color-accent-30);
   --color-accent-40: var(--color-accent-40);
   --color-accent-50: var(--color-accent-50);
-  --color-accent-60: var(--color-accent-60); /* 强调色 */
+  --color-accent-60: var(--color-accent-60); /* 強調色*/
   --color-accent-70: var(--color-accent-70);
   --color-accent-80: var(--color-accent-80);
   --color-accent-90: var(--color-accent-90);
   --color-accent-100: var(--color-accent-100);
 
+
+    /* error */
+  --color-error: var(--color-error-60);
+  --color-error-10: var(--color-error-10);
+  --color-error-20: var(--color-error-20);
+  --color-error-30: var(--color-error-30);
+  --color-error-40: var(--color-error-40);
+  --color-error-50: var(--color-error-50);
+  --color-error-60: var(--color-error-60); /* 警告色*/
+  --color-error-70: var(--color-error-70);
+  --color-error-80: var(--color-error-80);
+  --color-error-90: var(--color-error-90);
+  --color-error-100: var(--color-error-100);
+
+
+  /* Success */
+  --color-success: var(--color-success-60);
+  --color-success-10: var(--color-success-10);
+  --color-success-20: var(--color-success-20);
+  --color-success-30: var(--color-success-30);
+  --color-success-40: var(--color-success-40);
+  --color-success-50: var(--color-success-50);
+  --color-success-60: var(--color-success-60); /* 成功主色*/
+  --color-success-70: var(--color-success-70);
+  --color-success-80: var(--color-success-80);
+  --color-success-90: var(--color-success-90);
+  --color-success-100: var(--color-success-100);
+
+
+  
   /* Neutral - White */
   --color-white: var(--color-white);
   --color-white-95: var(--color-white-95);

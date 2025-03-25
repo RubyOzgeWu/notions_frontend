@@ -1,45 +1,40 @@
 <template>
-  <section class="w-full flex justify-center">
-    <div class="flex flex-col w-full max-w-[1440px] h-screen py-12 px-20 gap-8">
-      <Title class="text-primary">我的主控板</Title>
-      <div
-        class="content flex-1 flex md:gap-20 lg:gap-32 overflow-hidden w-full"
-      >
-        <!-- overview -->
-        <div class="flex flex-1 overflow-scroll flex-col gap-12">
-          <!-- 任務數量 -->
-          <div class="flex flex-col w-full gap-6">
-            <CardCount
-              :title="'DSP'"
-              :count="countPages(dspDatabase)"
-            ></CardCount>
-            <CardCount
-              :title="'SSP'"
-              :count="countPages(sspDatabase)"
-            ></CardCount>
-          </div>
-          <!-- 待辦事項 -->
-          <div class="flex-1 w-full max-h-[60vh]">
-            <ListTodo
-              :data="allDatabase"
-              @update-status="handleStatusUpdate"
-            ></ListTodo>
-          </div>
+  <Layout>
+    <Title class="text-primary">我的主控板</Title>
+    <div class="content flex-1 flex md:gap-20 lg:gap-32 overflow-hidden w-full">
+      <!-- overview -->
+      <div class="flex flex-1 overflow-scroll flex-col gap-12">
+        <!-- 任務數量 -->
+        <div class="flex flex-col w-full gap-6">
+          <CardCount
+            :title="'DSP'"
+            :count="countPages(dspDatabase)"
+          ></CardCount>
+          <CardCount
+            :title="'SSP'"
+            :count="countPages(sspDatabase)"
+          ></CardCount>
         </div>
-
-        <!-- calendar -->
-        <Calendar class="flex-2"></Calendar>
+        <!-- 待辦事項 -->
+        <div class="flex-1 w-full max-h-[60vh]">
+          <ListTodo
+            :data="allDatabase"
+            @update-status="handleStatusUpdate"
+          ></ListTodo>
+        </div>
       </div>
+
+      <!-- calendar -->
+      <Calendar class="flex-2"></Calendar>
     </div>
-  </section>
+  </Layout>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed } from "vue";
-import { apiGetDatabasePages, apiPatchDatabasePage } from "@/api/api.js";
-import ListTodo from "../components/dashboard/ListTodo.vue";
+import { ref, onMounted } from "vue";
 import { ElLoading } from "element-plus";
-import { all } from "axios";
+
+import { apiGetDatabasePages, apiPatchDatabasePage } from "@/api/api.js";
 
 const dspDatabaseId = import.meta.env.VITE_DSP_DATABASE_ID;
 const sspDatabaseId = import.meta.env.VITE_SSP_DATABASE_ID;
@@ -49,7 +44,8 @@ const sspDatabase = ref([]);
 
 const allDatabase = ref([]);
 
-/* 取得資料庫 MetaData */
+/* Functions */
+// 取得資料庫所有文件 
 const getDatabase = async (databaseId, database) => {
   const loadingInstance = ElLoading.service({
     lock: true,
@@ -82,7 +78,6 @@ const getDatabase = async (databaseId, database) => {
   }
 };
 
-/* Functions */
 // 計算資料庫文件數量
 const countPages = (database) => {
   if (database) {

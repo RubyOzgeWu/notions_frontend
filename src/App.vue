@@ -1,13 +1,13 @@
 <template>
-  <Layout>
+  <MainLayout>
     <template #main>
       <router-view />
     </template>
-  </Layout>
+  </MainLayout>
 </template>
 
 <script setup>
-import Layout from "./components/layout/Layout.vue";
+import MainLayout from "./components/layout/MainLayout.vue";
 import SideMenu from "./components/layout/SideMenu.vue";
 </script>
 
