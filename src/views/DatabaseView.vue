@@ -1,58 +1,55 @@
 <template>
-  <section>
-    <h3>{{ database?.title[0]?.text?.content }}</h3>
-    <div>目前資料庫 id: {{ databaseId }}</div>
-    <router-link to="/">返回首頁</router-link>
+  <Layout>
+    <Title class="text-primary">{{ database?.title[0]?.text?.content }}</Title>
+    <div class="content flex-1 flex md:gap-20 lg:gap-32 overflow-hidden w-full">
+      <!-- 任務清單 -->
+      <div class="flex basis-[35%] flex-col">
+        <h4 class="text-black-50 mb-6">任務清單</h4>
+        <div class="flex gap-2 mb-4">
+          <SearchBar @search="handleSearch" />
+        </div>
+        <div class="overflow-y-scroll">
+          <div class="flex flex-col gap-6">
+            <CardTask
+              v-for="item in filteredPages"
+              :key="item.id"
+              :id="item.id"
+              :database-id="item.parent.database_id"
+              :title="item.properties.Name.title[0]?.plain_text"
+              :date="item.properties['Due Date']?.date?.start"
+              :status="item.properties.Status.status?.name"
+            ></CardTask>
+          </div>
+        </div>
+      </div>
 
-    <h3>1. 取得 Notion 資料庫 MetaData</h3>
-    <h3>2. 取得 Notion 資料庫所有文件</h3>
-    <ul>
-      <li v-for="item in dbPages" :key="item.id">
-        <router-link
-          :to="{ name: 'task', params: { databaseId, taskId: item.id } }"
-          >{{ item.id }}</router-link
-        >
-      </li>
-    </ul>
-
-    <h3>3. 刪除 Notion 資料庫文件</h3>
-    <ul>
-      <li v-for="item in dbPages" :key="item.id">
-        {{ item.id }} <button @click="deletePage(item.id)">刪除</button>
-      </li>
-    </ul>
-
-    <h3>4. 新增 Notion 資料庫文件</h3>
-    <el-form :model="pageForm">
-      <el-form-item label="標題">
-        <el-input v-model="pageForm.title" />
-        <el-date-picker
-          v-model="pageForm.due_date"
-          type="date"
-          placeholder="Pick a day"
-          format="YYYY/MM/DD"
-          value-format="YYYY-MM-DD"
-        />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="addPage"
-          >新增資料庫</el-button
-        ></el-form-item
-      >
-    </el-form>
-  </section>
+      <!-- 新增任務 -->
+      <div class="flex basis-[65%] flex-col">
+        <h4 class="text-black-50 mb-4">新增任務</h4>
+        <div class="h-full">
+          <FormAdd
+            v-model="pageForm"
+            @submit="addPage"
+            class="h-full overflow-y-scroll"
+          ></FormAdd>
+        </div>
+      </div>
+    </div>
+  </Layout>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
+
+import { ElLoading } from "element-plus";
+
 import {
   apiGetDatabase,
   apiGetDatabasePages,
   apiPostDatabasePage,
   apiDeleteDatabasePage,
 } from "@/api/api.js";
-import { onMounted, watch } from "vue";
 
 const route = useRoute();
 const databaseId = computed(() => route.params.databaseId);
@@ -63,10 +60,29 @@ const dbPages = ref(null);
 const pageForm = reactive({
   title: "",
   due_date: "",
-  status: "In progress",
+  ticket: "",
+  description: "",
+  todo_list: [],
 });
 
-/* 取得資料庫 MetaData */
+const searchKeyword = ref("");
+
+const filteredPages = computed(() => {
+  if (!searchKeyword.value) return dbPages.value;
+
+  return dbPages.value.filter((item) => {
+    const title = item.properties.Name.title[0]?.plain_text || "";
+    return title.toLowerCase().includes(searchKeyword.value.toLowerCase());
+  });
+});
+
+/* Functions */
+// 搜尋
+const handleSearch = (keyword) => {
+  searchKeyword.value = keyword;
+};
+
+// 取得資料庫 MetaData
 const getDatabase = async () => {
   try {
     const response = await apiGetDatabase(databaseId.value);
@@ -75,17 +91,34 @@ const getDatabase = async () => {
     console.error("API 請求失敗:", error);
   }
 };
-/* 取得資料庫所有文件 */
+// 取得資料庫所有文件
 const getPages = async () => {
+  const loadingInstance = ElLoading.service({
+    lock: true,
+    text: "資料載入中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+
   try {
     const response = await apiGetDatabasePages(databaseId.value);
-    dbPages.value = response.data.results;
+    dbPages.value = response.data.results.slice().sort((a, b) => {
+      const dateA = a.properties["Due Date"]?.date?.start;
+      const dateB = b.properties["Due Date"]?.date?.start;
+
+      if (!dateA && dateB) return 1;
+      if (dateA && !dateB) return -1;
+      if (!dateA && !dateB) return 0;
+
+      return new Date(dateA).getTime() - new Date(dateB).getTime();
+    });
   } catch (error) {
     console.error("API 請求失敗:", error);
+  } finally {
+    loadingInstance.close();
   }
 };
 
-/* 新增資料庫文件 */
+// 新增資料庫文件
 const addPage = async () => {
   try {
     const response = await apiPostDatabasePage(databaseId.value, pageForm);
@@ -98,7 +131,8 @@ const addPage = async () => {
     console.error("API 請求失敗:", error);
   }
 };
-/* 刪除資料庫文件 */
+
+// 刪除資料庫文件
 const deletePage = async (pageId) => {
   try {
     const response = await apiDeleteDatabasePage(pageId);
