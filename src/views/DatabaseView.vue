@@ -26,11 +26,11 @@
       <!-- 新增任務 -->
       <div class="flex basis-[65%] flex-col">
         <h4 class="text-black-50 mb-4">新增任務</h4>
-        <div class="h-full">
+        <div class="h-full overflow-y-scroll">
           <FormAdd
             v-model="pageForm"
             @submit="addPage"
-            class="h-full overflow-y-scroll"
+            class="h-full"
           ></FormAdd>
         </div>
       </div>
@@ -60,7 +60,7 @@ const dbPages = ref(null);
 const pageForm = reactive({
   title: "",
   due_date: "",
-  ticket: "",
+  priority: "",
   description: "",
   todo_list: [],
 });
@@ -126,6 +126,9 @@ const addPage = async () => {
       getPages();
       pageForm.title = "";
       pageForm.due_date = "";
+      pageForm.priority = "";
+      pageForm.description = "";
+      pageForm.todo_list = [];
     }
   } catch (error) {
     console.error("API 請求失敗:", error);
