@@ -1,5 +1,14 @@
 <template>
-  <el-card :style="{ width: width }" class="px-2">
+  <el-card :style="{ width: width }" class="px-2 relative">
+    <button
+      class="absolute top-2 right-2 text-gray-400 hover:text-secondary hover:cursor-pointer"
+      @click="handleDelete"
+    >
+      <el-icon>
+        <Close />
+      </el-icon>
+    </button>
+
     <div class="flex justify-between gap-4">
       <div class="flex flex-1 flex-col gap-2">
         <router-link
@@ -26,6 +35,7 @@
 
 <script setup>
 import { computed } from "vue";
+import { Close } from "@element-plus/icons-vue";
 
 const props = defineProps({
   title: String,
@@ -35,6 +45,8 @@ const props = defineProps({
   id: String,
   databaseId: String,
 });
+
+const emit = defineEmits(["delete"]);
 
 const statusBg = computed(() => {
   switch (props.status) {
@@ -46,4 +58,8 @@ const statusBg = computed(() => {
       return "bg-white-60";
   }
 });
+
+const handleDelete = () => {
+  emit("delete", props.id);
+};
 </script>

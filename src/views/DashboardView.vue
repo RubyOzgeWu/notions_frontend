@@ -6,14 +6,29 @@
       <div class="flex flex-1 overflow-scroll flex-col gap-12">
         <!-- 任務數量 -->
         <div class="flex flex-col w-full gap-6">
-          <CardCount
-            :title="'DSP'"
-            :count="countPages(dspDatabase)"
-          ></CardCount>
-          <CardCount
-            :title="'SSP'"
-            :count="countPages(sspDatabase)"
-          ></CardCount>
+          <router-link
+            :to="{
+              name: 'database',
+              params: { databaseId: dspDatabaseId },
+            }"
+          >
+            <CardCount
+              :title="'DSP'"
+              :count="countPages(dspDatabase)"
+            ></CardCount>
+          </router-link>
+
+          <router-link
+            :to="{
+              name: 'database',
+              params: { databaseId: sspDatabaseId },
+            }"
+          >
+            <CardCount
+              :title="'SSP'"
+              :count="countPages(sspDatabase)"
+            ></CardCount>
+          </router-link>
         </div>
         <!-- 待辦事項 -->
         <div class="flex-1 w-full max-h-[60vh]">
@@ -45,7 +60,7 @@ const sspDatabase = ref([]);
 const allDatabase = ref([]);
 
 /* Functions */
-// 取得資料庫所有文件 
+// 取得資料庫所有文件
 const getDatabase = async (databaseId, database) => {
   const loadingInstance = ElLoading.service({
     lock: true,

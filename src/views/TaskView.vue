@@ -46,25 +46,27 @@
           <!-- status -->
           <div class="flex gap-4 items-center">
             <p class="flex-1 text-white-60">Status</p>
-            <Dropdown
+            <DropdownSelect
               class="flex-3"
               v-model="contentMap.status"
               :options="statusOptions"
               size="default"
+              :default="'Please select'"
             >
-            </Dropdown>
+            </DropdownSelect>
           </div>
 
           <!-- priority -->
           <div class="flex gap-4 items-center">
             <p class="flex-1 text-white-60">Priority</p>
-            <Dropdown
+            <DropdownSelect
               class="flex-3"
               v-model="contentMap.priority"
               :options="priorityOptions"
               size="default"
+              :default="'Please select'"
             >
-            </Dropdown>
+            </DropdownSelect>
           </div>
         </div>
 
@@ -132,12 +134,12 @@ const contentMap = reactive({
 const statusOptions = [
   { label: "Not started", value: "Not started", color: "#999999" },
   { label: "In progress", value: "In progress", color: "#94abd4" },
-  { label: "Done", value: "Done", color: "#4dc58b" },
+  { label: "Done", value: "Done", color: "#6fd7a1" },
 ];
 
 const priorityOptions = [
   { label: "P1", value: "P1", color: "#ff4d4f" },
-  { label: "P2", value: "P2", color: "#94abd4" },
+  { label: "P2", value: "P2", color: "#4e75af" },
   { label: "P3", value: "P3", color: "#4dc58b" },
 ];
 

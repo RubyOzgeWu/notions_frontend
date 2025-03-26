@@ -7,7 +7,7 @@
         class="w-2 h-2 rounded-full"
         :style="{ backgroundColor: selected?.color || '#ccc' }"
       ></span>
-      <span>{{ selected?.label || "Please Select" }}</span>
+      <span>{{ selected?.label || props.default }}</span>
       <el-icon class="ml-1"><ArrowDown /></el-icon>
     </div>
 
@@ -39,6 +39,9 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => [],
+  },
+  default: {
+    type: String,
   },
 });
 

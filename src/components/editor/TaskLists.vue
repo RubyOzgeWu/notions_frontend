@@ -4,7 +4,7 @@
       v-if="editor"
       ref="editorRef"
       :editor="editor"
-      class="flex-1 h-full"
+      class="flex-1 h-full break-all"
       @focus="handleFocus"
       @blur="handleBlur"
     />
