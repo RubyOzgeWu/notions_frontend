@@ -1,13 +1,13 @@
 <template>
-  <div class="p-4">
+  <div class="p-8 py-12">
     <nav>
-      <ul class="text-white leading-8 font-semibold">
+      <ul class="text-white leading-12 font-semibold text-lg">
         <li>
           <router-link to="/">主控板</router-link>
         </li>
         <li>
           資料庫
-          <ul class="pl-8 font-normal">
+          <ul class="pl-8 font-normal text-lg leading-8">
             <li>
               <router-link
                 :to="{

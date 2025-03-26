@@ -5,7 +5,11 @@
       <!-- 任務清單 -->
       <div class="flex basis-[35%] flex-col">
         <h4 class="text-black-50 mb-6">任務清單</h4>
-        <div class="flex gap-2 mb-4">
+        <div class="flex gap-2 mb-5">
+          <DropdownIcon
+            v-model:filter="priorityFilter"
+            :options="priorityOptions"
+          />
           <SearchBar @search="handleSearch" />
         </div>
         <div class="overflow-y-scroll">
@@ -18,6 +22,7 @@
               :title="item.properties.Name.title[0]?.plain_text"
               :date="item.properties['Due Date']?.date?.start"
               :status="item.properties.Status.status?.name"
+              @delete="deletePage"
             ></CardTask>
           </div>
         </div>
@@ -66,13 +71,30 @@ const pageForm = reactive({
 });
 
 const searchKeyword = ref("");
+const priorityFilter = ref("");
+
+const priorityOptions = [
+  { label: "全部", value: "", color: "#ccc" },
+  { label: "P1", value: "P1", color: "#ff4d4f" },
+  { label: "P2", value: "P2", color: "#4e75af" },
+  { label: "P3", value: "P3", color: "#4dc58b" },
+];
 
 const filteredPages = computed(() => {
-  if (!searchKeyword.value) return dbPages.value;
+  if (!Array.isArray(dbPages.value)) return [];
 
   return dbPages.value.filter((item) => {
     const title = item.properties.Name.title[0]?.plain_text || "";
-    return title.toLowerCase().includes(searchKeyword.value.toLowerCase());
+    const priority = item.properties.Priority.select?.name || "";
+
+    const matchesKeyword =
+      !searchKeyword.value ||
+      title.toLowerCase().includes(searchKeyword.value.toLowerCase());
+
+    const matchesPriority =
+      !priorityFilter.value || priority === priorityFilter.value;
+
+    return matchesKeyword && matchesPriority;
   });
 });
 
@@ -128,6 +150,7 @@ const addPage = async () => {
       pageForm.due_date = "";
       pageForm.priority = "";
       pageForm.description = "";
+      pageForm.ticket = "";
       pageForm.todo_list = [];
     }
   } catch (error) {
